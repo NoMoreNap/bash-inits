@@ -1,6 +1,8 @@
 #!/bin/sh
 
-IP="$1"
+IP=$(echo $SSH_CONNECTION | awk '{print $1}')
+
+echo "ваш IP-адрес: $IP"
 
 sudo apt update
 
@@ -13,20 +15,24 @@ echo 'installing nfw'
 sudo apt install ufw -y
 
 echo 'configure nfw'
-sudo ufw allow OpenSSH -y
-sudo ufw allow 22 -y
-sudo ufw allow out 80/tcp && sudo ufw allow in 80/tcp -y
-sudo ufw allow 443 -y
+sudo ufw allow OpenSSH
+sudo ufw allow 22
+sudo ufw allow out 80/tcp && sudo ufw allow in 80/tcp
+sudo ufw allow 443
+
+sudo ufw enable -y
 sudo ufw status
 
 echo -e "\e[31mcheck OpenSSH and 80 port listener \e[0m"
 echo "if all correctly press y if all right or n for exit and configure manually (y|n)"
 read -p "ur choice (y/n): " choice
 if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
-    echo 'y' | sudo ufw enable
+    echo 'y'
 else
+    sudo ufw disable
     kill $$
 fi
+
 
 echo "installing mongo"
 
