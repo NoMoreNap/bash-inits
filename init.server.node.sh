@@ -20,7 +20,7 @@ sudo ufw allow 22
 sudo ufw allow out 80/tcp && sudo ufw allow in 80/tcp
 sudo ufw allow 443
 
-sudo ufw enable -y
+echo "y" | sudo ufw enable
 sudo ufw status
 
 echo -e "\e[31mcheck OpenSSH and 80 port listener \e[0m"
