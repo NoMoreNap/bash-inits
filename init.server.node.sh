@@ -66,11 +66,10 @@ fi
 
 echo "configure mongo for $IP"
 
-port=$(ss -tlnp | grep mongo | awk '{print $4}' | awk -F ':' '{print $NF}')
 
-echo "port of MongoDB: $port"
+echo "port of MongoDB: 27017"
 
-sudo ufw allow from $IP to any port $port
+sudo ufw allow from $IP to any port 27017
 
 
 echo "update mongo configuration file for Mongo 6.0+"
@@ -84,7 +83,7 @@ echo "update mongo configuration file for Mongo 6.0+"
   echo "  path: /var/log/mongodb/mongod.log"
   echo ""
   echo "net:"
-  echo "  port: $port"
+  echo "  port: 27017"
   echo "  bindIp: 0.0.0.0"
   echo ""
   echo "processManagement:"
