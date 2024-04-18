@@ -66,7 +66,7 @@ fi
 
 echo "configure mongo for $IP"
 
-port=$(ss -tlnp | grep mongod | awk '{print $4}' | awk -F ':' '{print $NF}')
+port=$(ss -tlnp | grep mongo | awk '{print $4}' | awk -F ':' '{print $NF}')
 
 echo "port of MongoDB: $port"
 
