@@ -102,3 +102,12 @@ touch /etc/nginx/sites-enabled/test.conf
 } > /etc/nginx/sites-enabled/test.conf
 
 
+echo "installing redis"
+
+sudo apt install software-properties-common apt-transport-https curl ca-certificates -y
+sudo apt install redis -y
+sudo systemctl enable redis-server --now - y
+systemctl status redis-server
+echo 'ping' | redis-cli
+
+
